@@ -3,19 +3,13 @@ Contributors: ModernTribe
 Donate link: http://evnt.is/29
 Tags: events, calendar
 Requires at least: 4.9
-Tested up to: 5.5.1
+Tested up to: 5.7
 Requires PHP: 5.6
 Stable tag: 1.0.0
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
 The extension adds Export to Outlook Live / 365 buttons to the single event page.
-
-== Description ==
-
-This is the long description.  No limit, and you can use Markdown (as well as in the following sections).
-
-For backwards compatibility, if this section is missing, the full length of the short description will be used, and Markdown parsed.
 
 == Installation ==
 
@@ -37,6 +31,6 @@ We're always interested in your feedback and our [Help Desk](https://support.the
 
 == Changelog ==
 
-= [1.0.0] YYYY-MM-DD =
+= [1.0.0] 2021-03-24 =
 
 * Initial release
