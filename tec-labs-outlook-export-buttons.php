@@ -55,7 +55,7 @@ function tribe_extension_outlook_export_buttons() {
 			'outlook-export-buttons',
 			'<p>' . esc_html__( 'Couldn\'t properly load "The Events Calendar Extension: Outlook Export Buttons" the extension was deactivated.', 'tec-labs-outlook-export-buttons' ) . '</p>',
 			[],
-			// 1 second after that make sure the transiet is removed.
+			// 1 second after that make sure the transient is removed.
 			1 
 		);
 
