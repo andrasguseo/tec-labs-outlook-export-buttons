@@ -36,7 +36,7 @@ class PUE extends \tad_DI52_ServiceProvider {
 	 *
 	 * @var string
 	 */
-	private $update_url = 'http://tri.be/';
+	private $update_url = 'http://theeventscalendar.com/';
 
 	/**
 	 * The PUE checker instance.
@@ -56,7 +56,7 @@ class PUE extends \tad_DI52_ServiceProvider {
 		$this->container->singleton( static::class, $this );
 		$this->container->singleton( 'extension.outlook_export_buttons.pue', $this );
 
-		add_action( 'tribe_helper_activation_complete', [ $this, 'load_plugin_update_engine' ] );
+		//add_action( 'tribe_helper_activation_complete', [ $this, 'load_plugin_update_engine' ] );
 
 		register_uninstall_hook( Plugin::FILE, [ static::class, 'uninstall' ] );
 	}
