@@ -9,7 +9,7 @@ Stable tag: 1.0.0
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-The extension adds Export to Outlook Live / 365 buttons to the single event page
+The extension adds Export to Outlook Live / 365 buttons to the single event page.
 
 == Description ==
 

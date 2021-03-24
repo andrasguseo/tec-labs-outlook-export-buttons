@@ -3,7 +3,7 @@
  * Plugin Name:       The Events Calendar Extension: Outlook Export Buttons
  * Plugin URI:        https://theeventscalendar.com/extensions/outlook-export-buttons
  * GitHub Plugin URI: https://github.com/mt-support/tec-labs-outlook-export-buttons
- * Description:       The extension adds Export to Outlook Live / 365 buttons to the single event page
+ * Description:       The extension adds Export to Outlook Live / 365 buttons to the single event page.
  * Version:           1.0.0
  * Author:            The Events Calendar
  * Author URI:        http://evnt.is/1971
