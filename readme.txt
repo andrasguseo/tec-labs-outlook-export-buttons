@@ -1,15 +1,15 @@
-=== __TRIBE_BASE__ Extension: __TRIBE_NAME__ ===
+=== The Events Calendar Extension: Outlook Export Buttons ===
 Contributors: ModernTribe
-Donate link: http://m.tri.be/29
+Donate link: http://evnt.is/29
 Tags: events, calendar
 Requires at least: 4.9
 Tested up to: 5.5.1
 Requires PHP: 5.6
-Stable tag: __TRIBE_VERSION__
+Stable tag: 1.0.0
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
-__TRIBE_DESCRIPTION__
+The extension adds Export to Outlook Live / 365 buttons to the single event page
 
 == Description ==
 
