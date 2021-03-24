@@ -173,14 +173,14 @@ class Plugin extends tad_DI52_ServiceProvider {
 
 		// Button markups
 		$outlook_live_button = sprintf(
-			'<a target="_blank" class="tribe-events-gcal tribe-events-outlook-live tribe-events-button" title="' . esc_attr__( 'Add to Outlook Live Calendar', 'tribe-ext-outlook-export-buttons' ) . '" href="%s">+ %s</a>',
+			'<a target="_blank" class="tribe-events-gcal tribe-events-outlook-live tribe-events-button" title="' . esc_attr__( 'Add to Outlook Live Calendar', 'tec-labs-outlook-export-buttons' ) . '" href="%s">+ %s</a>',
 			$outlook_live_url,
-			esc_html( 'Outlook Live', 'tribe-ext-outlook-export-buttons' )
+			esc_html( 'Outlook Live', 'tec-labs-outlook-export-buttons' )
 		);
 		$outlook_365_button  = sprintf(
-			'<a target="_blank" class="tribe-events-gcal tribe-events-outlook-365 tribe-events-button" title="' . esc_attr__( 'Add to Outlook 365 Calendar', 'tribe-ext-outlook-export-buttons' ) . '" href="%s">+ %s</a>',
+			'<a target="_blank" class="tribe-events-gcal tribe-events-outlook-365 tribe-events-button" title="' . esc_attr__( 'Add to Outlook 365 Calendar', 'tec-labs-outlook-export-buttons' ) . '" href="%s">+ %s</a>',
 			$outlook_365_url,
-			esc_html( 'Outlook 365', 'tribe-ext-outlook-export-buttons' )
+			esc_html( 'Outlook 365', 'tec-labs-outlook-export-buttons' )
 		);
 
 		// Get the position of the opening div
