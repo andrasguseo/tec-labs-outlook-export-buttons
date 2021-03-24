@@ -86,6 +86,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 
 		// Start binds.
 
+		add_filter( 'tribe_events_ical_single_event_links', [ $this, 'generate_outlook_markup' ], 10, 1 );
 
 		// End binds.
 
