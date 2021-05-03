@@ -30,6 +30,7 @@ remove_filter( 'the_content', 'do_blocks', 9 );
 if ( $should_render ) :
 ?>
 	<div class="tribe-block tribe-block__events-link">
+		<?php if ( apply_filters( 'tec_show_outlook_live_button', true ) ) : ?>
 		<div class="tribe-block__btn--link tribe-block__events-gcal">
 			<a
 				href="https://outlook.live.com/<?php echo $outlook_url; ?>"
@@ -40,6 +41,8 @@ if ( $should_render ) :
 				Outlook Live
 			</a>
 		</div>
+		<? endif; ?>
+		<?php if ( apply_filters( 'tec_show_outlook_365_button', true ) ) : ?>
 		<div class="tribe-block__btn--link tribe-block__events-gcal">
 			<a
 				href="https://outlook.office.com/<?php echo $outlook_url; ?>"
@@ -50,6 +53,7 @@ if ( $should_render ) :
 				Outlook 365
 			</a>
 		</div>
+		<? endif; ?>
 		<?php if ( $has_google_cal ) : ?>
 			<div class="tribe-block__btn--link tribe-block__events-gcal">
 				<a
@@ -57,7 +61,7 @@ if ( $should_render ) :
 					title="<?php esc_attr_e( 'Add to Google Calendar', 'the-events-calendar' ); ?>"
 				>
 					<img src="<?php echo Tribe__Main::instance()->plugin_url  . 'src/modules/icons/link.svg'; ?>" />
-					<?php echo esc_html( $this->attr( 'googleCalendarLabel' ) ) ?>xxx
+					<?php echo esc_html( $this->attr( 'googleCalendarLabel' ) ) ?>
 				</a>
 			</div>
 		<?php endif; ?>
