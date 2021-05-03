@@ -88,6 +88,8 @@ class Plugin extends tad_DI52_ServiceProvider {
 
 		add_filter( 'tribe_events_ical_single_event_links', [ $this, 'generate_outlook_markup' ], 10, 1 );
 
+		add_filter( 'tribe_template_path_list', [ $this, 'alternative_template_locations' ], 10, 2 );
+
 		// End binds.
 
 		$this->container->register( Hooks::class );
@@ -194,6 +196,50 @@ class Plugin extends tad_DI52_ServiceProvider {
 			. substr( $calendar_links, $opening_div_end );
 
 		return $new_calendar_links;
+	}
+
+	/**
+	 * @param                  $folders
+	 * @param \Tribe__Template $template
+	 *
+	 * @return mixed
+	 */
+	public
+	function alternative_template_locations( $folders, \Tribe__Template $template ) {
+		// Which file namespace your plugin will use.
+		$plugin_name = 'tec-labs-outlook-export-buttons';
+
+		/**
+		 * Which order we should load your plugin files at. Plugin in which the file was loaded from = 20.
+		 * Events Pro = 25. Tickets = 17
+		 */
+		$priority = 5;
+
+		// Which folder in your plugin the customizations will be loaded from.
+		$custom_folder[] = 'views';
+
+		$hoax = $template->get_template_folder();
+
+		$hoa2 = array_diff( $template->get_template_folder(), [ 'src', 'views' ] );
+
+		// Builds the correct file path to look for.
+		$plugin_path = array_merge(
+			(array) trailingslashit( plugin_dir_path( __FILE__ ) ),
+			(array) $custom_folder,
+			array_diff( $template->get_template_folder(), [ 'src', 'views' ] )
+		);
+
+		/*
+		 * Custom loading location for overwriting file loading.
+		 */
+		$folders[ $plugin_name ] = [
+			'id'        => $plugin_name,
+			'namespace' => $plugin_name, // Only set this if you want to overwrite theme namespacing
+			'priority'  => $priority,
+			'path'      => $plugin_path,
+		];
+
+		return $folders;
 	}
 
 	/**
