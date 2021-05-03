@@ -30,7 +30,12 @@ remove_filter( 'the_content', 'do_blocks', 9 );
 if ( $should_render ) :
 ?>
 	<div class="tribe-block tribe-block__events-link">
-		<?php if ( apply_filters( 'tec_show_outlook_live_button', true ) ) : ?>
+		<?php
+		/**
+		 * Filters whether the Outlook Live button should be shown or not.
+		 */
+		if ( apply_filters( 'tec_show_outlook_live_button', true ) ) :
+		?>
 		<div class="tribe-block__btn--link tribe-block__events-gcal">
 			<a
 				href="https://outlook.live.com/<?php echo $outlook_url; ?>"
@@ -42,7 +47,12 @@ if ( $should_render ) :
 			</a>
 		</div>
 		<? endif; ?>
-		<?php if ( apply_filters( 'tec_show_outlook_365_button', true ) ) : ?>
+		<?php
+		/**
+		 * Filters whether the Outlook 365 button should be shown or not.
+		 */
+		if ( apply_filters( 'tec_show_outlook_365_button', true ) ) :
+		?>
 		<div class="tribe-block__btn--link tribe-block__events-gcal">
 			<a
 				href="https://outlook.office.com/<?php echo $outlook_url; ?>"
