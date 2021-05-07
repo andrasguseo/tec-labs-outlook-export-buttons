@@ -102,18 +102,13 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 * @return string Part of the URL containing the event information.
 	 */
 	public function generate_outlook_add_url( $calendar = 'live' ) {
+		// Getting the event details
 		$event = tribe_get_event();
 
-		$add_url = [];
-
-		$add_url['base'] = 'calendar/0/deeplink/compose/?path=/calendar/action/compose&rru=addevent';  // 27 (25) + 71 = 98 chars
 		$path = '/calendar/action/compose';
 		$rrv = 'addevent';
 
-		$startdt            = $event->start_date_utc;
-		$add_url['startdt'] = 'startdt=' . date( 'c', strtotime( $startdt ) ); // 19 chars
-		$startdt = date( 'c', strtotime( $startdt ) );
-
+		$startdt = $event->start_date_utc;
 		$enddt = $event->end_date_utc;
 
 		/**
@@ -121,22 +116,16 @@ class Plugin extends tad_DI52_ServiceProvider {
 		 * Using the 'allday' parameter doesn't work well through time zones.
 		 */
 		if ( $event->all_day ) {
-			$add_url['enddt'] =
-				'enddt='
-				. date( 'Y-m-d', strtotime( $enddt ) )
-				. 'T'
-				. date( 'H:i:s', strtotime( $startdt ) )
-				. date( 'P', strtotime( $enddt ) );
 			$enddt = date( 'Y-m-d', strtotime( $enddt ) )
 				. 'T'
 				. date( 'H:i:s', strtotime( $startdt ) )
 				. date( 'P', strtotime( $enddt ) );
 		} else {
-			$add_url['enddt'] = 'enddt=' . date( 'c', strtotime( $enddt ) ); // 17 chars
 			$enddt = date( 'c', strtotime( $enddt ) ); // 17 chars
 		}
 
-		$add_url['subject'] = 'subject=' . esc_html( $event->post_title ); // 8+ chars
+		$startdt = date( 'c', strtotime( $startdt ) );
+
 		$subject = esc_html( $event->post_title ); // 8+ chars
 
 		/**
@@ -171,41 +160,35 @@ class Plugin extends tad_DI52_ServiceProvider {
 				}
 			}
 
-			// urlencode() changes the spaces to +. That is how Outlook takes it over.
+			// urlencode() changes the spaces to +. That is also how Outlook will show it.
 			// So we're replacing it temporarily.
 			$event_details = str_replace( ' ', 'TEC_OUTLOOK_SPACE', $event_details );
 
 			// Encoding and trimming
 			if ( ! $num_words ) {
-				$add_url['body'] = 'body=' . urlencode( $event_details );
 				$body = urlencode( $event_details );
 			} else {
-				$add_url['body'] = 'body=' . urlencode( wp_trim_words( $event_details, $num_words ) );
 				$body = urlencode( wp_trim_words( $event_details, $num_words ) );
 			}
+
+			// Changing the spaces to %20, Outlook can take that.
 			$body = str_replace( 'TEC_OUTLOOK_SPACE', '%20', $body );
 		} else {
 			$body = false;
 		}
 
-		$outlook_url = implode( '&', $add_url );
-
 		$params = [
-			'path' => $path,
-			'rrv'   => $rrv,
+			'path'    => $path,
+			'rrv'     => $rrv,
 			'startdt' => $startdt,
-			'enddt' => $enddt,
+			'enddt'   => $enddt,
 			'subject' => $subject,
-			'body' => $body,
+			'body'    => $body,
 		];
 
 		$base_url = 'https://outlook.' . $calendar .'.com/calendar/0/deeplink/compose/';
 		$url    = add_query_arg( $params, $base_url );
 
-		// Changing the spaces to %20, Outlook can take that.
-		$outlook_url = str_replace( 'TEC_OUTLOOK_SPACE', '%20', $outlook_url );
-
-//		return $outlook_url;
 		return $url;
 	}
 
