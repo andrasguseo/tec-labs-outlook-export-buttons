@@ -106,10 +106,10 @@ class Plugin extends tad_DI52_ServiceProvider {
 
 		$add_url = [];
 
-		$add_url['base'] = 'calendar/0/deeplink/compose/?path=/calendar/action/compose&rru=addevent';
+		$add_url['base'] = 'calendar/0/deeplink/compose/?path=/calendar/action/compose&rru=addevent';  // 27 (25) + 71 = 98 chars
 
 		$startdt            = $event->start_date_utc;
-		$add_url['startdt'] = 'startdt=' . date( 'c', strtotime( $startdt ) );
+		$add_url['startdt'] = 'startdt=' . date( 'c', strtotime( $startdt ) ); // 19 chars
 
 		$enddt = $event->end_date_utc;
 
@@ -125,10 +125,10 @@ class Plugin extends tad_DI52_ServiceProvider {
 				. date( 'H:i:s', strtotime( $startdt ) )
 				. date( 'P', strtotime( $enddt ) );
 		} else {
-			$add_url['enddt'] = 'enddt=' . date( 'c', strtotime( $enddt ) );
+			$add_url['enddt'] = 'enddt=' . date( 'c', strtotime( $enddt ) ); // 17 chars
 		}
 
-		$add_url['subject'] = 'subject=' . esc_html( $event->post_title );
+		$add_url['subject'] = 'subject=' . esc_html( $event->post_title ); // 8+ chars
 
 		/**
 		 * A filter to hide or show the event description
@@ -142,17 +142,36 @@ class Plugin extends tad_DI52_ServiceProvider {
 		 *
 		 * @param bool|int $num_words
 		 */
-		$num_words = apply_filters( 'tribe_events_ical_outlook_event_description_num_words', '20' );
+		$num_words = apply_filters( 'tribe_events_ical_outlook_event_description_num_words', false );
 
 		if ( $include_event_description ) {
+			$event_details = $event->post_content;
+
+			// Stripping tags
+			$event_details = strip_tags( $event_details, '<p>' );
+
+			// Truncate Event Description and add permalink if greater than 900 characters
+			if ( strlen( $event_details ) > 900 ) {
+
+				$event_url     = get_permalink( $post->ID );
+				$event_details = substr( $event_details, 0, 900 );
+
+				//Only add the permalink if it's shorter than 900 characters, so we don't exceed the browser's URL limits (~2000)
+				if ( strlen( $event_url ) < 900 ) {
+					$event_details .= sprintf( esc_html__( ' (View Full %1$s Description Here: %2$s)', 'the-events-calendar' ), tribe_get_event_label_singular(), $event_url );
+				}
+			}
+
 			if ( ! $num_words ) {
-				$add_url['body'] = 'body=' . esc_html( $event->post_content );
+				$add_url['body'] = 'body=' . esc_html( $event_details );
 			} else {
-				$add_url['body'] = 'body=' . wp_trim_words( esc_html( $event->post_content ), $num_words );
+				$add_url['body'] = 'body=' . esc_html( wp_trim_words( $event_details, $num_words ) );
 			}
 		}
 
 		$outlook_url = implode( '&', $add_url );
+
+		//\Tribe__Events__Main::esc_gcal_url( $outlook_url );
 
 		return $outlook_url;
 	}
