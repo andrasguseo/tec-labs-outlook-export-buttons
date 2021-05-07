@@ -23,6 +23,11 @@
  */
 
 /**
+ * Resource for Office 365 API
+ * https://docs.microsoft.com/en-us/previous-versions/office/office-365-api/api/version-2.0/calendar-rest-operations#CreateEvents
+ */
+
+/**
  * Define the base file that loaded the plugin for determining plugin path and other variables.
  *
  * @since 1.0.0
