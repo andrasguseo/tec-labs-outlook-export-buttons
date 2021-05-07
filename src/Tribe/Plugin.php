@@ -176,10 +176,8 @@ class Plugin extends tad_DI52_ServiceProvider {
 
 		$outlook_url = implode( '&', $add_url );
 
-		// Changing the spaces to %20
+		// Changing the spaces to %20, Outlook can take that.
 		$outlook_url = str_replace( 'TEC_OUTLOOK_SPACE', '%20', $outlook_url );
-
-		//$outlook_url = \Tribe__Events__Main::esc_gcal_url( $outlook_url );
 
 		return $outlook_url;
 	}
