@@ -162,16 +162,24 @@ class Plugin extends tad_DI52_ServiceProvider {
 				}
 			}
 
+			// urlencode() changes the spaces to +. That is how Outlook takes it over.
+			// So we're replacing it temporarily.
+			$event_details = str_replace( ' ', 'TEC_OUTLOOK_SPACE', $event_details );
+
+			// Encoding and trimming
 			if ( ! $num_words ) {
-				$add_url['body'] = 'body=' . esc_html( $event_details );
+				$add_url['body'] = 'body=' . urlencode( $event_details );
 			} else {
-				$add_url['body'] = 'body=' . esc_html( wp_trim_words( $event_details, $num_words ) );
+				$add_url['body'] = 'body=' . urlencode( wp_trim_words( $event_details, $num_words ) );
 			}
 		}
 
 		$outlook_url = implode( '&', $add_url );
 
-		//\Tribe__Events__Main::esc_gcal_url( $outlook_url );
+		// Changing the spaces to %20
+		$outlook_url = str_replace( 'TEC_OUTLOOK_SPACE', '%20', $outlook_url );
+
+		//$outlook_url = \Tribe__Events__Main::esc_gcal_url( $outlook_url );
 
 		return $outlook_url;
 	}
