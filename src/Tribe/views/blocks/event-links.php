@@ -36,7 +36,7 @@ if ( $should_render ) :
 		?>
 		<div class="tribe-block__btn--link tribe-block__events-gcal">
 			<a
-				href="<?php echo \Tribe\Extensions\OutlookExportButtons\Plugin::generate_outlook_add_url( 'live' ); ?>"
+				href="<?php echo \Tribe\Extensions\OutlookExportButtons\Plugin::generate_outlook_full_url( 'live' ); ?>"
 				title="<?php esc_attr_e( 'Add to Outlook Live Calendar', 'the-events-calendar' ); ?>"
 				target="_blank"
 			>
@@ -53,7 +53,7 @@ if ( $should_render ) :
 		?>
 		<div class="tribe-block__btn--link tribe-block__events-gcal">
 			<a
-				href="<?php echo \Tribe\Extensions\OutlookExportButtons\Plugin::generate_outlook_add_url( 'office' ); ?>"
+				href="<?php echo \Tribe\Extensions\OutlookExportButtons\Plugin::generate_outlook_full_url( 'office' ); ?>"
 				title="<?php esc_attr_e( 'Add to Outlook 365 Calendar', 'the-events-calendar' ); ?>"
 				target="_blank"
 			>

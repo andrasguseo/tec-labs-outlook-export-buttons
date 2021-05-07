@@ -126,7 +126,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 
 		$startdt = date( 'c', strtotime( $startdt ) );
 
-		$subject = esc_html( $event->post_title ); // 8+ chars
+		$subject = self::space_replace_and_encode( strip_tags( $event->post_title ) ); // 8+ chars
 
 		/**
 		 * A filter to hide or show the event description
@@ -135,44 +135,39 @@ class Plugin extends tad_DI52_ServiceProvider {
 		 */
 		$include_event_description = (bool) apply_filters( 'tribe_events_ical_outlook_include_event_description', true );
 
-		/**
-		 * Allows the filtering the length of the event description
-		 *
-		 * @param bool|int $num_words
-		 */
-		$num_words = apply_filters( 'tribe_events_ical_outlook_event_description_num_words', false );
-
 		if ( $include_event_description ) {
-			$event_details = $event->post_content;
+			$body = $event->post_content;
 
 			// Stripping tags
-			$event_details = strip_tags( $event_details, '<p>' );
+			$body = strip_tags( $body, '<p>' );
 
 			// Truncate Event Description and add permalink if greater than 900 characters
-			if ( strlen( $event_details ) > 900 ) {
+			if ( strlen( $body ) > 900 ) {
 
-				$event_url     = get_permalink( $post->ID );
-				$event_details = substr( $event_details, 0, 900 );
+				$body = substr( $body, 0, 900 );
+
+				$event_url = get_permalink( $event->ID );
 
 				//Only add the permalink if it's shorter than 900 characters, so we don't exceed the browser's URL limits (~2000)
 				if ( strlen( $event_url ) < 900 ) {
-					$event_details .= sprintf( esc_html__( ' (View Full %1$s Description Here: %2$s)', 'the-events-calendar' ), tribe_get_event_label_singular(), $event_url );
+					$body .= sprintf( esc_html__( ' (View Full %1$s Description Here: %2$s)', 'the-events-calendar' ), tribe_get_event_label_singular(), $event_url );
 				}
 			}
 
-			// urlencode() changes the spaces to +. That is also how Outlook will show it.
-			// So we're replacing it temporarily.
-			$event_details = str_replace( ' ', 'TEC_OUTLOOK_SPACE', $event_details );
+			/**
+			 * Allows the filtering the length of the event description
+			 *
+			 * @param bool|int $num_words
+			 */
+			$num_words = apply_filters( 'tribe_events_ical_outlook_event_description_num_words', false );
 
 			// Encoding and trimming
-			if ( ! $num_words ) {
-				$body = urlencode( $event_details );
-			} else {
-				$body = urlencode( wp_trim_words( $event_details, $num_words ) );
+			if ( (int)$num_words > 0 ) {
+				$body = wp_trim_words( $body, $num_words );
 			}
 
 			// Changing the spaces to %20, Outlook can take that.
-			$body = str_replace( 'TEC_OUTLOOK_SPACE', '%20', $body );
+			$body = self::space_replace_and_encode( $body );
 		} else {
 			$body = false;
 		}
@@ -186,27 +181,55 @@ class Plugin extends tad_DI52_ServiceProvider {
 			'body'    => $body,
 		];
 
+		return $params;
 		$base_url = 'https://outlook.' . $calendar .'.com/calendar/0/deeplink/compose/';
-		$url    = add_query_arg( $params, $base_url );
+		$url      = add_query_arg( $params, $base_url );
 
 		return $url;
 	}
 
+	public function generate_outlook_full_url( $calendar ) {
+		$params   = self::generate_outlook_add_url();
+		$base_url = 'https://outlook.' . $calendar .'.com/calendar/0/deeplink/compose/';
+		$url      = add_query_arg( $params, $base_url );
+
+		return $url;
+	}
 	/**
-	 * Generate the markup of the export buttons.
+	 * Changing spaces to %20 and encoding.
+	 * urlencode() changes the spaces to +. That is also how Outlook will show it.
+	 * So we're replacing it temporarily and then changing them to %20 which will work.
+	 *
+	 * @param $string
+	 *
+	 * @return array|string|string[]
+	 */
+	public
+	function space_replace_and_encode( $string ) {
+		$string = str_replace( ' ', 'TEC_OUTLOOK_SPACE', $string );
+		$string = urlencode( $string );
+		$string = str_replace( 'TEC_OUTLOOK_SPACE', '%20', $string );
+
+		return $string;
+	}
+
+	/**
+	 * Generate the markup of the export buttons for Classic Editor
 	 *
 	 * @param $calendar_links
 	 *
 	 * @return string The full markup of the export buttons.
 	 */
 	public function generate_outlook_markup( $calendar_links ) {
-		$outlook_add_url = $this->generate_outlook_add_url();
+		$params = $this->generate_outlook_add_url();
 
 		// Outlook Live URL
-		$outlook_live_url = 'https://outlook.live.com/' . $outlook_add_url;
+		$outlook_live_base_url = 'https://outlook.live.com/calendar/0/deeplink/compose/';
+		$outlook_live_url = add_query_arg( $params, $outlook_live_base_url );
 
 		// Outlook 365 URL
-		$outlook_365_url = 'https://outlook.office.com/' . $outlook_add_url;
+		$outlook_365_base_url = 'https://outlook.office.com/calendar/0/deeplink/compose/';
+		$outlook_365_url = add_query_arg( $params, $outlook_365_base_url );
 
 		// Button markups
 		$outlook_live_button = sprintf(
