@@ -23,6 +23,8 @@ $has_ical       = $this->attr( 'hasiCal' );
 
 $should_render = $has_google_cal || $has_ical;
 
+$plugin = tribe( \Tribe\Extensions\OutlookExportButtons\Plugin::class );
+
 remove_filter( 'the_content', 'do_blocks', 9 );
 
 if ( $should_render ) :
@@ -36,7 +38,7 @@ if ( $should_render ) :
 		?>
 		<div class="tribe-block__btn--link tribe-block__events-gcal">
 			<a
-				href="<?php echo \Tribe\Extensions\OutlookExportButtons\Plugin::generate_outlook_full_url( 'live' ); ?>"
+				href="<?php echo $plugin->generate_outlook_full_url( 'live' ); ?>"
 				title="<?php esc_attr_e( 'Add to Outlook Live Calendar', 'the-events-calendar' ); ?>"
 				target="_blank"
 			>
@@ -53,7 +55,7 @@ if ( $should_render ) :
 		?>
 		<div class="tribe-block__btn--link tribe-block__events-gcal">
 			<a
-				href="<?php echo \Tribe\Extensions\OutlookExportButtons\Plugin::generate_outlook_full_url( 'office' ); ?>"
+				href="<?php echo $plugin->generate_outlook_full_url( 'office' ); ?>"
 				title="<?php esc_attr_e( 'Add to Outlook 365 Calendar', 'the-events-calendar' ); ?>"
 				target="_blank"
 			>
