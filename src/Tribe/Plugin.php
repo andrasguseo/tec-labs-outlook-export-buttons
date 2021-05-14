@@ -126,7 +126,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 
 		$startdt = date( 'c', strtotime( $startdt ) );
 
-		$subject = self::space_replace_and_encode( strip_tags( $event->post_title ) ); // 8+ chars
+		$subject = $this->space_replace_and_encode( strip_tags( $event->post_title ) ); // 8+ chars
 
 		/**
 		 * A filter to hide or show the event description
@@ -167,7 +167,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 			}
 
 			// Changing the spaces to %20, Outlook can take that.
-			$body = self::space_replace_and_encode( $body );
+			$body = $this->space_replace_and_encode( $body );
 		} else {
 			$body = false;
 		}
@@ -188,8 +188,9 @@ class Plugin extends tad_DI52_ServiceProvider {
 		return $url;
 	}
 
-	public function generate_outlook_full_url( $calendar ) {
-		$params   = self::generate_outlook_add_url();
+	public
+	function generate_outlook_full_url( $calendar ) {
+		$params   = $this->generate_outlook_add_url();
 		$base_url = 'https://outlook.' . $calendar .'.com/calendar/0/deeplink/compose/';
 		$url      = add_query_arg( $params, $base_url );
 
@@ -274,15 +275,11 @@ class Plugin extends tad_DI52_ServiceProvider {
 		$priority = 5;
 
 		// Which folder in your plugin the customizations will be loaded from.
-		$custom_folder[] = 'views';
-
-		$hoax = $template->get_template_folder();
-
-		$hoa2 = array_diff( $template->get_template_folder(), [ 'src', 'views' ] );
+		$custom_folder[] = 'src/views';
 
 		// Builds the correct file path to look for.
 		$plugin_path = array_merge(
-			(array) trailingslashit( plugin_dir_path( __FILE__ ) ),
+			(array) trailingslashit( plugin_dir_path( TRIBE_EXTENSION_OUTLOOK_EXPORT_BUTTONS_FILE ) ),
 			(array) $custom_folder,
 			array_diff( $template->get_template_folder(), [ 'src', 'views' ] )
 		);
