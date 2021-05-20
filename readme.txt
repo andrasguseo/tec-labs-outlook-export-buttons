@@ -3,7 +3,7 @@ Contributors: ModernTribe
 Donate link: http://evnt.is/29
 Tags: events, calendar
 Requires at least: 4.9
-Tested up to: 5.7
+Tested up to: 5.7.2
 Requires PHP: 5.6
 Stable tag: 1.0.0
 License: GPL version 3 or any later version
@@ -31,6 +31,6 @@ We're always interested in your feedback and our [Help Desk](https://support.the
 
 == Changelog ==
 
-= [1.0.0] 2021-03-24 =
+= [1.0.0] 2021-05-21 =
 
 * Initial release
