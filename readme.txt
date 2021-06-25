@@ -1,7 +1,7 @@
 === The Events Calendar Extension: Outlook Export Buttons ===
 Contributors: theeventscalendar
 Donate link: http://evnt.is/29
-Tags: events, calendar
+Tags: events, calendar, export, outlook
 Requires at least: 4.9
 Tested up to: 5.7.2
 Requires PHP: 5.6
