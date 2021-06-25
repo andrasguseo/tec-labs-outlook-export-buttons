@@ -1,5 +1,5 @@
 === The Events Calendar Extension: Outlook Export Buttons ===
-Contributors: ModernTribe
+Contributors: theeventscalendar
 Donate link: http://evnt.is/29
 Tags: events, calendar
 Requires at least: 4.9
