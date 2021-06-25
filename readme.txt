@@ -31,6 +31,6 @@ We're always interested in your feedback and our [Help Desk](https://support.the
 
 == Changelog ==
 
-= [1.0.0] 2021-05-21 =
+= [1.0.0] 2021-06-25 =
 
 * Initial release
