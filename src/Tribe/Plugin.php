@@ -85,13 +85,11 @@ class Plugin extends tad_DI52_ServiceProvider {
 		}
 
 		// Start binds.
-
 		add_filter( 'tribe_events_ical_single_event_links', [ $this, 'generate_outlook_markup' ], 10, 1 );
 
 		add_filter( 'tec_views_v2_single_subscribe_links', [ $this, 'generate_outlook_markup_2021_single' ], 10, 2 );
 
 		add_filter( 'tribe_template_path_list', [ $this, 'alternative_template_locations' ], 10, 2 );
-
 		// End binds.
 
 		$this->container->register( Hooks::class );
@@ -101,9 +99,11 @@ class Plugin extends tad_DI52_ServiceProvider {
 	/**
 	 * Generate the parameters for the Outlook export buttons.
 	 *
-	 * @param $calendar Whether it's Outlook live or Outlook 365.
+	 * @since 1.0.0
 	 *
-	 * @return string   Part of the URL containing the event information.
+	 * @param string $calendar Whether it's Outlook live or Outlook 365.
+	 *
+	 * @return string          Part of the URL containing the event information.
 	 */
 	public function generate_outlook_add_url_parameters( $calendar = 'live' ) {
 		// Getting the event details
@@ -133,9 +133,11 @@ class Plugin extends tad_DI52_ServiceProvider {
 		$subject = $this->space_replace_and_encode( strip_tags( $event->post_title ) ); // 8+ chars
 
 		/**
-		 * A filter to hide or show the event description
+		 * A filter to hide or show the event description.
 		 *
-		 * @param bool $include_event_description
+		 * @since 1.0.0
+		 *
+		 * @param bool $include_event_description Whether to include the event description or not.
 		 */
 		$include_event_description = (bool) apply_filters( 'tribe_events_ical_outlook_include_event_description', true );
 
@@ -159,7 +161,9 @@ class Plugin extends tad_DI52_ServiceProvider {
 			}
 
 			/**
-			 * Allows the filtering the length of the event description
+			 * Allows filtering the length of the event description.
+			 *
+			 * @since 1.0.0
 			 *
 			 * @param bool|int $num_words
 			 */
@@ -195,9 +199,9 @@ class Plugin extends tad_DI52_ServiceProvider {
 	/**
 	 * Generate the full "Add to calendar" URL for the block editor.
 	 *
-	 * @param $calendar Whether it's Outlook live or Outlook 365.
+	 * @param string $calendar Whether it's Outlook live or Outlook 365.
 	 *
-	 * @return string   The full URL.
+	 * @return string          The full URL.
 	 */
 	public function generate_outlook_full_url( $calendar ) {
 		$params   = $this->generate_outlook_add_url_parameters();
@@ -212,9 +216,11 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 * urlencode() changes the spaces to +. That is also how Outlook will show it.
 	 * So we're replacing it temporarily and then changing them to %20 which will work.
 	 *
-	 * @param $string
+	 * @since 1.0.0
 	 *
-	 * @return array|string|string[]
+	 * @param string $string The URL string.
+	 *
+	 * @return string        The encoded URL string.
 	 */
 	public function space_replace_and_encode( $string ) {
 		$string = str_replace( ' ', 'TEC_OUTLOOK_SPACE', $string );
@@ -225,11 +231,13 @@ class Plugin extends tad_DI52_ServiceProvider {
 	}
 
 	/**
-	 * Generate the markup of the export buttons for Classic Editor
+	 * Generate the markup of the export buttons for Classic Editor.
 	 *
-	 * @param $calendar_links
+	 * @since 1.0.0
 	 *
-	 * @return string The full markup of the export buttons.
+	 * @param string $calendar_links Full HTML markup of the existing export buttons, including the container tag.
+	 *
+	 * @return string                The full markup of the export buttons.
 	 */
 	public function generate_outlook_markup( $calendar_links ) {
 /*		$params = $this->generate_outlook_add_url_parameters();
@@ -271,13 +279,13 @@ class Plugin extends tad_DI52_ServiceProvider {
 	}
 
 	/**
-	 * Generate the markup for a button.
+	 * Generate the markup for an export button.
 	 *
 	 * @since 1.1.0
 	 *
-	 * @param $version Whether it's Outlook Live or Outlook 365 (office).
+	 * @param string $version Whether it's Outlook Live or Outlook 365 (office).
 	 *
-	 * @return string The full markup of the export buttons.
+	 * @return string         The full markup of an export button.
 	 */
 	public function generate_outlook_button_markup( $version = 'live' ) {
 		if ( '365' == $version ) {
@@ -292,9 +300,10 @@ class Plugin extends tad_DI52_ServiceProvider {
 			$button_label = esc_html( '+ Outlook Live', 'tec-labs-outlook-export-buttons' );
 		}
 
+		// Generate the URL.
 		$url = $this->generate_outlook_full_url( $calendar );
 
-		// Button markups
+		// Generate the button markup.
 		$button_markup = sprintf(
 			'<a target="_blank" class="tribe-events-gcal ' . $button_css .  ' tribe-events-button" title="' . $button_title . '" href="%1$s">%2$s</a>',
 			$url,
@@ -306,6 +315,8 @@ class Plugin extends tad_DI52_ServiceProvider {
 
 	/**
 	 * Add the Outlook export buttons to the 2021 classic editor single event page.
+	 *
+	 * @since 1.1.0
 	 *
 	 * @param array                        $links The array of link objects.
 	 * @param \Tribe\Events\Views\V2\View  $view  The current View implementation.
@@ -321,6 +332,8 @@ class Plugin extends tad_DI52_ServiceProvider {
 
 	/**
 	 * Setting up the template location in the extension.
+	 *
+	 * @since 1.0.0
 	 *
 	 * @param                  $folders
 	 * @param \Tribe__Template $template
