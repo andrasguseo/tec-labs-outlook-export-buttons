@@ -197,8 +197,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @return string   The full URL.
 	 */
-	public
-	function generate_outlook_full_url( $calendar ) {
+	public function generate_outlook_full_url( $calendar ) {
 		$params   = $this->generate_outlook_add_url();
 		$base_url = 'https://outlook.' . $calendar .'.com/calendar/0/deeplink/compose/';
 		$url      = add_query_arg( $params, $base_url );
@@ -215,8 +214,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @return array|string|string[]
 	 */
-	public
-	function space_replace_and_encode( $string ) {
+	public function space_replace_and_encode( $string ) {
 		$string = str_replace( ' ', 'TEC_OUTLOOK_SPACE', $string );
 		$string = urlencode( $string );
 		$string = str_replace( 'TEC_OUTLOOK_SPACE', '%20', $string );
@@ -275,8 +273,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @return mixed
 	 */
-	public
-	function alternative_template_locations( $folders, \Tribe__Template $template ) {
+	public function alternative_template_locations( $folders, \Tribe__Template $template ) {
 		// Which file namespace your plugin will use.
 		$plugin_name = 'tec-labs-outlook-export-buttons';
 
@@ -316,8 +313,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @return bool Whether the plugin dependency manifest is satisfied or not.
 	 */
-	protected
-	function check_plugin_dependencies() {
+	protected function check_plugin_dependencies() {
 		$this->register_plugin_dependencies();
 
 		return tribe_check_plugin( static::class );
@@ -328,8 +324,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @since 1.0.0
 	 */
-	protected
-	function register_plugin_dependencies() {
+	protected function register_plugin_dependencies() {
 		$plugin_register = new Plugin_Register();
 		$plugin_register->register_plugin();
 
