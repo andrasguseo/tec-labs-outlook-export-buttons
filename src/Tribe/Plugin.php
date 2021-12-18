@@ -103,7 +103,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @return string   Part of the URL containing the event information.
 	 */
-	public function generate_outlook_add_url( $calendar = 'live' ) {
+	public function generate_outlook_add_url_parameters( $calendar = 'live' ) {
 		// Getting the event details
 		$event = tribe_get_event();
 
@@ -191,14 +191,14 @@ class Plugin extends tad_DI52_ServiceProvider {
 	}
 
 	/**
-	 * Generate the full "Add to calendar" URL.
+	 * Generate the full "Add to calendar" URL for the block editor.
 	 *
 	 * @param $calendar Whether it's Outlook live or Outlook 365.
 	 *
 	 * @return string   The full URL.
 	 */
 	public function generate_outlook_full_url( $calendar ) {
-		$params   = $this->generate_outlook_add_url();
+		$params   = $this->generate_outlook_add_url_parameters();
 		$base_url = 'https://outlook.' . $calendar .'.com/calendar/0/deeplink/compose/';
 		$url      = add_query_arg( $params, $base_url );
 
