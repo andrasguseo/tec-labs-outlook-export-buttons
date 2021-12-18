@@ -97,9 +97,11 @@ class Plugin extends tad_DI52_ServiceProvider {
 	}
 
 	/**
-	 * Generate the URL for the Outlook export buttons.
+	 * Generate the parameters for the Outlook export buttons.
 	 *
-	 * @return string Part of the URL containing the event information.
+	 * @param $calendar Whether it's Outlook live or Outlook 365.
+	 *
+	 * @return string   Part of the URL containing the event information.
 	 */
 	public function generate_outlook_add_url( $calendar = 'live' ) {
 		// Getting the event details
@@ -182,12 +184,19 @@ class Plugin extends tad_DI52_ServiceProvider {
 		];
 
 		return $params;
-		$base_url = 'https://outlook.' . $calendar .'.com/calendar/0/deeplink/compose/';
+		/*$base_url = 'https://outlook.' . $calendar .'.com/calendar/0/deeplink/compose/';
 		$url      = add_query_arg( $params, $base_url );
 
-		return $url;
+		return $url;*/
 	}
 
+	/**
+	 * Generate the full "Add to calendar" URL.
+	 *
+	 * @param $calendar Whether it's Outlook live or Outlook 365.
+	 *
+	 * @return string   The full URL.
+	 */
 	public
 	function generate_outlook_full_url( $calendar ) {
 		$params   = $this->generate_outlook_add_url();
@@ -196,6 +205,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 
 		return $url;
 	}
+
 	/**
 	 * Changing spaces to %20 and encoding.
 	 * urlencode() changes the spaces to +. That is also how Outlook will show it.
@@ -258,6 +268,8 @@ class Plugin extends tad_DI52_ServiceProvider {
 	}
 
 	/**
+	 * Setting up the template location in the extension.
+	 *
 	 * @param                  $folders
 	 * @param \Tribe__Template $template
 	 *
