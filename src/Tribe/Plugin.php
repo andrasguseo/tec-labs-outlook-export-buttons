@@ -88,6 +88,8 @@ class Plugin extends tad_DI52_ServiceProvider {
 
 		add_filter( 'tribe_events_ical_single_event_links', [ $this, 'generate_outlook_markup' ], 10, 1 );
 
+		add_filter( 'tec_views_v2_single_subscribe_links', [ $this, 'generate_outlook_markup_2021_single' ], 10, 2 );
+
 		add_filter( 'tribe_template_path_list', [ $this, 'alternative_template_locations' ], 10, 2 );
 
 		// End binds.
@@ -300,6 +302,21 @@ class Plugin extends tad_DI52_ServiceProvider {
 		);
 
 		return $button_markup;
+	}
+
+	/**
+	 * Add the Outlook export buttons to the 2021 classic editor single event page.
+	 *
+	 * @param array                        $links The array of link objects.
+	 * @param \Tribe\Events\Views\V2\View  $view  The current View implementation.
+	 *
+	 * @return array The array of link objects.
+	 */
+	public function generate_outlook_markup_2021_single( $links, $view ) {
+		$links[] = $this->generate_outlook_button_markup( 'live' );
+		$links[] = $this->generate_outlook_button_markup( '365' );
+
+		return $links;
 	}
 
 	/**
