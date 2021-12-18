@@ -43,7 +43,7 @@ if ( $should_render ) :
 				target="_blank"
 			>
 				<img src="<?php echo Tribe__Main::instance()->plugin_url  . 'src/modules/icons/link.svg'; ?>" />
-				Outlook Live
+				<?php esc_html_e( 'Outlook Live', 'tec-labs-outlook-export-buttons' ); ?>
 			</a>
 		</div>
 		<? endif; ?>
@@ -60,7 +60,7 @@ if ( $should_render ) :
 				target="_blank"
 			>
 				<img src="<?php echo Tribe__Main::instance()->plugin_url  . 'src/modules/icons/link.svg'; ?>" />
-				Outlook 365
+				<?php esc_html_e( 'Outlook 365', 'tec-labs-outlook-export-buttons' ); ?>
 			</a>
 		</div>
 		<? endif; ?>
