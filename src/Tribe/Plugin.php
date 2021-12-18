@@ -152,7 +152,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 
 				//Only add the permalink if it's shorter than 900 characters, so we don't exceed the browser's URL limits (~2000)
 				if ( strlen( $event_url ) < 900 ) {
-					$body .= sprintf( esc_html__( ' (View Full %1$s Description Here: %2$s)', 'the-events-calendar' ), tribe_get_event_label_singular(), $event_url );
+					$body .= ' ' . sprintf( esc_html__( '(View Full %1$s Description Here: %2$s)', 'the-events-calendar' ), tribe_get_event_label_singular(), $event_url );
 				}
 			}
 
