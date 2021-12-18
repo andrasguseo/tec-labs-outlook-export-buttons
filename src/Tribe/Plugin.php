@@ -230,7 +230,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 * @return string The full markup of the export buttons.
 	 */
 	public function generate_outlook_markup( $calendar_links ) {
-		$params = $this->generate_outlook_add_url();
+/*		$params = $this->generate_outlook_add_url_parameters();
 
 		// Outlook Live URL
 		$outlook_live_base_url = 'https://outlook.live.com/calendar/0/deeplink/compose/';
@@ -250,7 +250,10 @@ class Plugin extends tad_DI52_ServiceProvider {
 			'<a target="_blank" class="tribe-events-gcal tribe-events-outlook-365 tribe-events-button" title="' . esc_attr__( 'Add to Outlook 365 Calendar', 'tec-labs-outlook-export-buttons' ) . '" href="%1$s">%2$s</a>',
 			$outlook_365_url,
 			esc_html( '+ Outlook 365', 'tec-labs-outlook-export-buttons' )
-		);
+		);*/
+
+		$outlook_live_button = $this->generate_outlook_button_markup( 'live' );
+		$outlook_365_button = $this->generate_outlook_button_markup( '365' );
 
 		// Get the position of the opening div
 		$opening_div_end = strpos( $calendar_links, '>' ) + 1;
@@ -263,6 +266,38 @@ class Plugin extends tad_DI52_ServiceProvider {
 			. substr( $calendar_links, $opening_div_end );
 
 		return $new_calendar_links;
+	}
+
+	/**
+	 * Generate the markup for Outlook Live
+	 *
+	 * @param $version Whether it's Outlook Live or Outlook 365 (office).
+	 *
+	 * @return string The full markup of the export buttons.
+	 */
+	public function generate_outlook_button_markup( $version = 'live' ) {
+		if ( '365' == $version ) {
+			$calendar = 'office';
+			$button_css = 'tribe-events-outlook-365';
+			$button_title = esc_attr__( 'Add to Outlook 365 Calendar', 'tec-labs-outlook-export-buttons' );
+			$button_label = esc_html( '+ Outlook 365', 'tec-labs-outlook-export-buttons' );
+		} else {
+			$calendar = 'live';
+			$button_css = 'tribe-events-outlook-live';
+			$button_title = esc_attr__( 'Add to Outlook Live Calendar', 'tec-labs-outlook-export-buttons' );
+			$button_label = esc_html( '+ Outlook Live', 'tec-labs-outlook-export-buttons' );
+		}
+
+		$url = $this->generate_outlook_full_url( $calendar );
+
+		// Button markups
+		$button_markup = sprintf(
+			'<a target="_blank" class="tribe-events-gcal ' . $button_css .  ' tribe-events-button" title="' . $button_title . '" href="%1$s">%2$s</a>',
+			$url,
+			$button_label
+		);
+
+		return $button_markup;
 	}
 
 	/**
