@@ -269,7 +269,9 @@ class Plugin extends tad_DI52_ServiceProvider {
 	}
 
 	/**
-	 * Generate the markup for Outlook Live
+	 * Generate the markup for a button.
+	 *
+	 * @since 1.1.0
 	 *
 	 * @param $version Whether it's Outlook Live or Outlook 365 (office).
 	 *
