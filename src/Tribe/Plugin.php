@@ -190,10 +190,6 @@ class Plugin extends tad_DI52_ServiceProvider {
 		];
 
 		return $params;
-		/*$base_url = 'https://outlook.' . $calendar .'.com/calendar/0/deeplink/compose/';
-		$url      = add_query_arg( $params, $base_url );
-
-		return $url;*/
 	}
 
 	/**
@@ -240,28 +236,6 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 * @return string                The full markup of the export buttons.
 	 */
 	public function generate_outlook_markup( $calendar_links ) {
-/*		$params = $this->generate_outlook_add_url_parameters();
-
-		// Outlook Live URL
-		$outlook_live_base_url = 'https://outlook.live.com/calendar/0/deeplink/compose/';
-		$outlook_live_url = add_query_arg( $params, $outlook_live_base_url );
-
-		// Outlook 365 URL
-		$outlook_365_base_url = 'https://outlook.office.com/calendar/0/deeplink/compose/';
-		$outlook_365_url = add_query_arg( $params, $outlook_365_base_url );
-
-		// Button markups
-		$outlook_live_button = sprintf(
-			'<a target="_blank" class="tribe-events-gcal tribe-events-outlook-live tribe-events-button" title="' . esc_attr__( 'Add to Outlook Live Calendar', 'tec-labs-outlook-export-buttons' ) . '" href="%1$s">%2$s</a>',
-			$outlook_live_url,
-			esc_html( '+ Outlook Live', 'tec-labs-outlook-export-buttons' )
-		);
-		$outlook_365_button  = sprintf(
-			'<a target="_blank" class="tribe-events-gcal tribe-events-outlook-365 tribe-events-button" title="' . esc_attr__( 'Add to Outlook 365 Calendar', 'tec-labs-outlook-export-buttons' ) . '" href="%1$s">%2$s</a>',
-			$outlook_365_url,
-			esc_html( '+ Outlook 365', 'tec-labs-outlook-export-buttons' )
-		);*/
-
 		$outlook_live_button = $this->generate_outlook_button_markup( 'live' );
 		$outlook_365_button = $this->generate_outlook_button_markup( '365' );
 
