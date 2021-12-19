@@ -6,7 +6,7 @@
  * Description:       The extension adds Export to Outlook Live / 365 buttons to the single event page.
  * Version:           1.1.0
  * Author:            The Events Calendar
- * Author URI:        http://evnt.is/1971
+ * Author URI:        https://evnt.is/1971
  * License:           GPL version 3 or any later version
  * License URI:       https://www.gnu.org/licenses/gpl-3.0.html
  * Text Domain:       tec-labs-outlook-export-buttons
@@ -58,7 +58,7 @@ function tribe_extension_outlook_export_buttons() {
 	if ( ! class_exists( '\Tribe\Extensions\OutlookExportButtons\Plugin' ) ) {
 		tribe_transient_notice(
 			'outlook-export-buttons',
-			'<p>' . esc_html__( 'Couldn\'t properly load "The Events Calendar Extension: Outlook Export Buttons" the extension was deactivated.', 'tec-labs-outlook-export-buttons' ) . '</p>',
+			'<p>' . esc_html__( 'Couldn\'t properly load "The Events Calendar Extension: Outlook Export Buttons", the extension was deactivated.', 'tec-labs-outlook-export-buttons' ) . '</p>',
 			[],
 			// 1 second after that make sure the transient is removed.
 			1 
