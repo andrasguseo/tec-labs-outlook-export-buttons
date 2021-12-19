@@ -1,6 +1,6 @@
 === The Events Calendar Extension: Outlook Export Buttons ===
 Contributors: theeventscalendar
-Donate link: http://evnt.is/29
+Donate link: https://evnt.is/29
 Tags: events, calendar, export, outlook
 Requires at least: 4.9
 Tested up to: 5.8.2
@@ -35,6 +35,7 @@ We're always interested in your feedback and our [Help Desk](https://support.the
 
 * Fix - Make sure the buttons show up on the new single event page when using the classic editor.
 * Fix - Make the button labels translatable when using the block editor.
+* Fix - Added missing .pot file.
 
 = [1.0.0] 2021-06-25 =
 
