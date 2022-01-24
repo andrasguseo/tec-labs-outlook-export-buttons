@@ -3,9 +3,9 @@ Contributors: theeventscalendar
 Donate link: https://evnt.is/29
 Tags: events, calendar, export, outlook
 Requires at least: 4.9
-Tested up to: 5.8.2
+Tested up to: 5.8.3
 Requires PHP: 5.6
-Stable tag: 1.1.0
+Stable tag: 1.1.1
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -30,6 +30,10 @@ Please visit our [extension library](https://theeventscalendar.com/extensions/) 
 We're always interested in your feedback and our [Help Desk](https://support.theeventscalendar.com/) are the best place to flag any issues. Do note, however, that the degree of support we provide for extensions like this one tends to be very limited.
 
 == Changelog ==
+
+= [1.1.1] 2022-01-24 =
+
+* Fix - Removed time zone offset from the start and end times of the date because Outlook deeplink doesn't support it any longer.
 
 = [1.1.0] 2021-12-20 =
 
