@@ -112,8 +112,8 @@ class Plugin extends tad_DI52_ServiceProvider {
 		$path = '/calendar/action/compose';
 		$rrv = 'addevent';
 
-		$startdt = $event->start_date_utc;
-		$enddt = $event->end_date_utc;
+		$startdt = $event->start_date;
+		$enddt = $event->end_date;
 
 		/**
 		 * If event is an all day event, then adjust the end time.
@@ -126,9 +126,11 @@ class Plugin extends tad_DI52_ServiceProvider {
 				. date( 'P', strtotime( $enddt ) );
 		} else {
 			$enddt = date( 'c', strtotime( $enddt ) ); // 17 chars
+			$enddt = substr( $enddt, 0, strlen( $enddt )-6 );
 		}
 
 		$startdt = date( 'c', strtotime( $startdt ) );
+		$startdt = substr( $startdt, 0, strlen( $startdt )-6 );
 
 		$subject = $this->space_replace_and_encode( strip_tags( $event->post_title ) ); // 8+ chars
 
