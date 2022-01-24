@@ -122,8 +122,8 @@ class Plugin extends tad_DI52_ServiceProvider {
 		if ( $event->all_day ) {
 			$enddt = date( 'Y-m-d', strtotime( $enddt ) )
 				. 'T'
-				. date( 'H:i:s', strtotime( $startdt ) )
-				. date( 'P', strtotime( $enddt ) );
+				. date( 'H:i:s', strtotime( $startdt ) );
+				//. date( 'P', strtotime( $enddt ) );
 		} else {
 			$enddt = date( 'c', strtotime( $enddt ) ); // 17 chars
 			$enddt = substr( $enddt, 0, strlen( $enddt )-6 );
