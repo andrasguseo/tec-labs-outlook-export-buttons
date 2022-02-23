@@ -2,10 +2,10 @@
 Contributors: theeventscalendar
 Donate link: https://evnt.is/29
 Tags: events, calendar, export, outlook
-Requires at least: 4.9
-Tested up to: 5.8.3
-Requires PHP: 5.6
-Stable tag: 1.1.1
+Requires at least: 5.6
+Tested up to: 5.9.1
+Requires PHP: 7.1
+Stable tag: 1.1.2
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -30,6 +30,11 @@ Please visit our [extension library](https://theeventscalendar.com/extensions/) 
 We're always interested in your feedback and our [Help Desk](https://support.theeventscalendar.com/) are the best place to flag any issues. Do note, however, that the degree of support we provide for extensions like this one tends to be very limited.
 
 == Changelog ==
+
+= [1.1.2] 2022-02-23 =
+
+* Fix - Added missing PHP tags in the template file. (Thanks to @richrabago for reporting!)
+* Tweak - Adjusted the required PHP version and minimum WordPress version to match that of our plugins.
 
 = [1.1.1] 2022-01-24 =
 

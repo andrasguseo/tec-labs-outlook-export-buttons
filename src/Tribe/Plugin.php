@@ -19,7 +19,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.1.1';
+	const VERSION = '1.1.2';
 
 	/**
 	 * Stores the base slug for the plugin.
@@ -44,21 +44,21 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @var string Plugin Directory.
 	 */
-	public string $plugin_dir;
+	public $plugin_dir;
 
 	/**
 	 * @since 1.0.0
 	 *
 	 * @var string Plugin path.
 	 */
-	public string $plugin_path;
+	public $plugin_path;
 
 	/**
 	 * @since 1.0.0
 	 *
 	 * @var string Plugin URL.
 	 */
-	public string $plugin_url;
+	public $plugin_url;
 
 	/**
 	 * Setup the Extension's properties.
