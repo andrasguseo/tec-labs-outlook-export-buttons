@@ -46,7 +46,7 @@ if ( $should_render ) :
 				<?php esc_html_e( 'Outlook Live', 'tec-labs-outlook-export-buttons' ); ?>
 			</a>
 		</div>
-		<? endif; ?>
+		<?php endif; ?>
 		<?php
 		/**
 		 * Filters whether the Outlook 365 button should be shown or not.
@@ -63,7 +63,7 @@ if ( $should_render ) :
 				<?php esc_html_e( 'Outlook 365', 'tec-labs-outlook-export-buttons' ); ?>
 			</a>
 		</div>
-		<? endif; ?>
+		<?php endif; ?>
 		<?php if ( $has_google_cal ) : ?>
 			<div class="tribe-block__btn--link tribe-block__events-gcal">
 				<a
