@@ -44,21 +44,21 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @var string Plugin Directory.
 	 */
-	public $plugin_dir;
+	public string $plugin_dir;
 
 	/**
 	 * @since 1.0.0
 	 *
 	 * @var string Plugin path.
 	 */
-	public $plugin_path;
+	public string $plugin_path;
 
 	/**
 	 * @since 1.0.0
 	 *
 	 * @var string Plugin URL.
 	 */
-	public $plugin_url;
+	public string $plugin_url;
 
 	/**
 	 * Setup the Extension's properties.
@@ -101,11 +101,9 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $calendar Whether it's Outlook live or Outlook 365.
-	 *
-	 * @return string          Part of the URL containing the event information.
+	 * @return array          Part of the URL containing the event information.
 	 */
-	public function generate_outlook_add_url_parameters( $calendar = 'live' ) {
+	public function generate_outlook_add_url_parameters(): array {
 		// Getting the event details
 		$event = tribe_get_event();
 
@@ -201,7 +199,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @return string          The full URL.
 	 */
-	public function generate_outlook_full_url( $calendar ) {
+	public function generate_outlook_full_url( string $calendar ): string {
 		$params   = $this->generate_outlook_add_url_parameters();
 		$base_url = 'https://outlook.' . $calendar .'.com/calendar/0/deeplink/compose/';
 		$url      = add_query_arg( $params, $base_url );
@@ -220,7 +218,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @return string        The encoded URL string.
 	 */
-	public function space_replace_and_encode( $string ) {
+	public function space_replace_and_encode( string $string ): string {
 		$string = str_replace( ' ', 'TEC_OUTLOOK_SPACE', $string );
 		$string = urlencode( $string );
 		$string = str_replace( 'TEC_OUTLOOK_SPACE', '%20', $string );
@@ -237,7 +235,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @return string                The full markup of the export buttons.
 	 */
-	public function generate_outlook_markup( $calendar_links ) {
+	public function generate_outlook_markup( string $calendar_links ): string {
 		$outlook_live_button = $this->generate_outlook_button_markup( 'live' );
 		$outlook_365_button = $this->generate_outlook_button_markup( '365' );
 
@@ -263,17 +261,17 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @return string         The full markup of an export button.
 	 */
-	public function generate_outlook_button_markup( $version = 'live' ) {
+	public function generate_outlook_button_markup( string $version = 'live' ): string {
 		if ( '365' == $version ) {
 			$calendar = 'office';
 			$button_css = 'tribe-events-outlook-365';
 			$button_title = esc_attr__( 'Add to Outlook 365 Calendar', 'tec-labs-outlook-export-buttons' );
-			$button_label = esc_html( '+ Outlook 365', 'tec-labs-outlook-export-buttons' );
+			$button_label = esc_html__( '+ Outlook 365', 'tec-labs-outlook-export-buttons' );
 		} else {
 			$calendar = 'live';
 			$button_css = 'tribe-events-outlook-live';
 			$button_title = esc_attr__( 'Add to Outlook Live Calendar', 'tec-labs-outlook-export-buttons' );
-			$button_label = esc_html( '+ Outlook Live', 'tec-labs-outlook-export-buttons' );
+			$button_label = esc_html__( '+ Outlook Live', 'tec-labs-outlook-export-buttons' );
 		}
 
 		// Generate the URL.
@@ -294,12 +292,11 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @since 1.1.0
 	 *
-	 * @param array                        $links The array of link objects.
-	 * @param \Tribe\Events\Views\V2\View  $view  The current View implementation.
+	 * @param array $links The array of link objects.
 	 *
 	 * @return array The array of link objects.
 	 */
-	public function generate_outlook_markup_2021_single( $links, $view ) {
+	public function generate_outlook_markup_2021_single( array $links ): array {
 		$links[] = $this->generate_outlook_button_markup( 'live' );
 		$links[] = $this->generate_outlook_button_markup( '365' );
 
