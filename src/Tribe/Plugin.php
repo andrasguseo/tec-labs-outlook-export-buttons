@@ -2,7 +2,7 @@
 
 namespace Tribe\Extensions\OutlookExportButtons;
 
-use tad_DI52_ServiceProvider;
+use TEC\Common\Contracts\Service_Provider;
 
 /**
  * Class Plugin
@@ -11,7 +11,7 @@ use tad_DI52_ServiceProvider;
  * @since   1.0.0
  *
  */
-class Plugin extends tad_DI52_ServiceProvider {
+class Plugin extends Service_Provider {
 	/**
 	 * Stores the version for the plugin.
 	 *
@@ -19,7 +19,7 @@ class Plugin extends tad_DI52_ServiceProvider {
 	 *
 	 * @var string
 	 */
-	const VERSION = '1.1.2';
+	const VERSION = '1.1.3';
 
 	/**
 	 * Stores the base slug for the plugin.

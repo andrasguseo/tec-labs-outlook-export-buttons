@@ -5,7 +5,7 @@ Tags: events, calendar, export, outlook
 Requires at least: 5.6
 Tested up to: 5.9.1
 Requires PHP: 7.1
-Stable tag: 1.1.2
+Stable tag: 1.1.3
 License: GPL version 3 or any later version
 License URI: https://www.gnu.org/licenses/gpl-3.0.html
 
@@ -30,6 +30,10 @@ Please visit our [extension library](https://theeventscalendar.com/extensions/) 
 We're always interested in your feedback and our [Help Desk](https://support.theeventscalendar.com/) are the best place to flag any issues. Do note, however, that the degree of support we provide for extensions like this one tends to be very limited.
 
 == Changelog ==
+
+= [1.1.3] 2023-06-24 =
+
+* Fix - Update to use the new Service_Provider contract in common.
 
 = [1.1.2] 2022-02-23 =
 
